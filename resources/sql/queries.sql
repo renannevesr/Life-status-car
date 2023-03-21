@@ -1,5 +1,5 @@
 -- INSERT A NEW CAR
--- :name insert-car! :! :n
+-- :name create-car :! :n
 -- :doc Insert a new car into the cars table
 INSERT INTO cars (model, year, brand)
 VALUES (:model, :year, :brand);

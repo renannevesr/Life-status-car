@@ -8,9 +8,9 @@
    [ring.util.http-response :as response]))
 
 
-
 (defn home-page [request]
-  (layout/render request "home.html" {:docs (-> "docs/docs.md" io/resource slurp)}))
+  (let [cars (db/get-all-cars)]
+    (layout/render request "home.html" {:cars cars})))
 
 (defn about-page [request]
   (layout/render request "about.html"))

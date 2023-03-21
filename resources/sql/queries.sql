@@ -18,7 +18,7 @@ DELETE FROM cars
 WHERE id = :id;
 
 -- GET ALL CARS
--- :name get-cars :? :0
+-- :name get-all-cars :? :0
 -- :doc Retrieve all cars from the cars table
 SELECT * FROM cars;
 

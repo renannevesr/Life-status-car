@@ -8,19 +8,24 @@
    [ring.util.http-response :as response]
    [ring.util.response :refer [redirect]]))
 
-(defn create-car [request]
-  ; (print :params request)
-  (def params (:params request))
-  ;; (let [params (:params request)])
-  (def cidade (get-in params [:form-params :montadora]))
-  (print "\n\n\n cidade=")
-  (print params)
-  (print "\n\n\n")
-    ;;  (db/create-car params)
-    ;;  (ring.util.response/redirect "/")
-     (response/found "/")
-     )
-    
+(defn create-car [request] 
+  (def params (:params request)) 
+     (db/create-car params)
+     (response/found "/"))
+
+; (defn create-car [request] 
+;   (let [params (:params request)] 
+;     (db/with-transaction [conn]
+;       (try
+;         (let [car (db/create-car conn params)]
+;           (db/insert-revision! conn {:id_car (:id car)
+;                                      :last_revision_date (:last_revision_date params)
+;                                      :created_at ("2011-12-03T10:15:30")
+;                                      :km (:km params)})
+;           (response/found "/"))
+;         (catch Exception e
+;           (db/rollback! conn)
+;           (throw e))))))    
 
 (defn home-page [request]
   (let [cars (db/get-all-cars)]

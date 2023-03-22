@@ -22,6 +22,12 @@ WHERE id = :id;
 -- :doc Retrieve all cars from the cars table
 SELECT * FROM cars;
 
+-- GET CAR BY ID
+-- :name get-car-by-id :? :1
+-- :doc Retrieve all revisions for a specific car from the revisions table
+SELECT * FROM cars
+WHERE id = :id;
+
 -- INSERT A NEW REVISION
 -- :name insert-revision! :! :n
 -- :doc Insert a new revision into the revisions table

@@ -13,26 +13,32 @@
      (db/create-car params)
      (response/found "/"))
 
-; (defn create-car [request] 
-;   (let [params (:params request)] 
-;     (db/with-transaction [conn]
-;       (try
-;         (let [car (db/create-car conn params)]
-;           (db/insert-revision! conn {:id_car (:id car)
-;                                      :last_revision_date (:last_revision_date params)
-;                                      :created_at ("2011-12-03T10:15:30")
-;                                      :km (:km params)})
-;           (response/found "/"))
-;         (catch Exception e
-;           (db/rollback! conn)
-;           (throw e))))))    
+; (defn create-revision [request]
+;   (def params (:params request)) 
+;     ;  (db/create-revision params)
+;   )
 
 (defn home-page [request]
   (let [cars (db/get-all-cars)]
     (layout/render request "home.html" {:cars cars})))
 
-(defn about-page [request]
+(defn create-car-page [request]
   (layout/render request "create.html"))
+
+(defn new-revision-page [request]
+  (def car-id (-> request
+                  (get-in [:params :id])
+                  (Integer/parseInt)))
+  (def car (db/get-car-by-id car-id))
+    (layout/render request "new-revision.html" {:car car})))
+
+; (defn new-revision-page [request]
+;   (let [car-id (-> request
+;                   (get-in [:params :id])
+;                   (Integer/parseInt))
+;         car (db/get-car-by-id car-id)]
+;     (layout/render request "new-revision.html"
+;                    {:car car})))
 
 (defn home-routes []
   [ ""
@@ -40,7 +46,9 @@
                 middleware/wrap-formats
               ]} 
    ["/" {:get home-page}]
-   ["/criar" {:get about-page}]
-   ["/add-car" {:post create-car}]
+   ["/criar" {:get create-car-page}]
+   ["/revisao/:id" {:get new-revision-page}]
+   ["/add-car" {:post create-car}] 
+  ;  ["/add-revision" {:post create-revision}]
    ])
 

@@ -4,7 +4,7 @@
    [life-status-car.db.core :as db]
    [clojure.java.io :as io]
    [life-status-car.middleware :as middleware]
-   [ring.util.response]
+   [ring.util.response :as request]
    [ring.util.http-response :as response]
    [ring.util.response :refer [redirect]]))
 
@@ -26,19 +26,12 @@
   (layout/render request "create.html"))
 
 (defn new-revision-page [request]
-  (def car-id (-> request
-                  (get-in [:params :id])
+  (def id (-> request
+                  (get-in [:path-params :id])
                   (Integer/parseInt)))
-  (def car (db/get-car-by-id car-id))
-    (layout/render request "new-revision.html" {:car car})))
-
-; (defn new-revision-page [request]
-;   (let [car-id (-> request
-;                   (get-in [:params :id])
-;                   (Integer/parseInt))
-;         car (db/get-car-by-id car-id)]
-;     (layout/render request "new-revision.html"
-;                    {:car car})))
+  (println id) 
+  (def car (db/get-car-by-id id))
+    (layout/render request "new-revision.html" {:car car}))
 
 (defn home-routes []
   [ ""

@@ -24,7 +24,7 @@ SELECT * FROM cars;
 
 -- GET CAR BY ID
 -- :name get-car-by-id :? :1
--- :doc Retrieve all revisions for a specific car from the revisions table
+-- :doc retrieve a car given the id.
 SELECT * FROM cars
 WHERE id = :id;
 

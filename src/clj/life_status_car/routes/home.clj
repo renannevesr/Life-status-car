@@ -29,8 +29,8 @@
   (def id (-> request
                   (get-in [:path-params :id])
                   (Integer/parseInt)))
-  (println id) 
-  (def car (db/get-car-by-id id))
+  (def cars (db/get-all-cars))
+    (def car (first (filter #(= (:id %) id) cars)))
     (layout/render request "new-revision.html" {:car car}))
 
 (defn home-routes []

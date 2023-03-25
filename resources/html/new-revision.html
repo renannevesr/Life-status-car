@@ -1,14 +1,16 @@
 {% extends "base.html" %} {% block content %}
-<h1>Inserir nova revisão</h1>
-<h2>id do carro: {{ car }}</h2>
+<h1>Detalhes do carro</h1>
+<h2>Modelo: {{car.model}}</h2>
+<h2>Marca: {{car.brand}}</h2>
+<h2>Ano: {{car.year}}</h2>
 <form method="POST" action="/add-revision">
     <label for="last-revision-date">Data da última revisão:</label>
-    <input type="datetime-local" id="last-revision-date" name="last-revision-date" required><br>
+    <input type="datetime-local" id="last-revision-date" name="last_revision_date" required><br>
 
     <label for="km">Quilometragem:</label>
     <input type="number" id="km" name="km" required><br>
 
-    <input type="hidden" id="car-id" name="car-id" value="{{ carId }}">
+    <input type="hidden" id="id-car" name="id_car" value="{{ car.id }}">
 
     <button type="submit">Inserir revisão</button>
 </form>

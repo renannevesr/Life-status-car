@@ -1,9 +1,12 @@
 {% extends "base.html" %} {% block content %}
 <div class="content">
-    <h1>Lista de cars:</h1>
+    <h1>Lista de carros:</h1>
     <ul>
         {% for car in cars %}
-        <li>{{ car }}</li>
+        <li>
+            {{ car }}
+            <a href="/revisao/{{ car.id }}">Nova revisão</a>
+        </li>
         {% endfor %}
     </ul>
 </div>

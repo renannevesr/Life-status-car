@@ -48,9 +48,6 @@
 
 (defn home-routes []
   [ ""
-  {:middleware [middleware/wrap-csrf
-                middleware/wrap-formats
-              ]} 
    ["/" {:get home-page}]
    ["/criar" {:get create-car-page}]
    ["/revisao/:id" {:get new-revision-page}]

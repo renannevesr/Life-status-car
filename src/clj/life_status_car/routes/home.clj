@@ -22,6 +22,7 @@
 
 (defn home-page [request]
   (let [cars (db/get-all-cars)]
+    (println (type cars))
     (layout/render request "home.html" {:cars cars})))
 
 (defn create-car-page [request]
@@ -32,10 +33,13 @@
                (get-in [:path-params :id])
                (Integer/parseInt))
         car (db/get-car-by-id {:id id})
-        revisions (db/get-revisions-for-car {:id_car id})]
-        (println revisions)
+        revisions (db/get-revisions-for-car {:id_car id})
+        items (db/get-revision-limits-items-for-car {:id_car id})
+        ]
     (layout/render request "new-revision.html"
-                   {:car (assoc car :last-revision revisions)})))
+                   {:car (assoc car :last-revision revisions)
+                    :items items
+                   })))
 
 (defn edit-car [request]
   (def id (-> request
@@ -63,6 +67,20 @@
     
     (response/found "/")))
 
+
+(defn diff-in-months [date1 months]
+  (let [days-in-month (fn [date]
+                        (-> date
+                            (.withDayOfMonth 1)
+                            (.plusMonths 1)
+                            (.minusDays 1)
+                            (.getDayOfMonth)))
+        now (java.time.LocalDate/now)
+        months1 (* (- (.getYear date1) 1900) 12 (+ (.getMonth date1) 1))
+        months2 (* (- (.getYear now) 1900) 12 (+ (.getMonth now) 1))
+        days1 (days-in-month date1)
+        days2 (days-in-month now)]
+    (>= (- (+ months1 days1) (+ months2 days2)) months)))
 
 (defn home-routes []
   [ ""

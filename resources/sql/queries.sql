@@ -54,3 +54,13 @@ SELECT * FROM revisions
 WHERE id_car = :id_car
 ORDER BY last_revision_date DESC
 LIMIT 1;
+
+-- GET REVISION LIMITS ITEMS FOR A CAR
+-- :name get-revision-limits-items-for-car :? :0
+-- :doc Retrieve all revision limits items for a specific car from the revision_car_items_limits table
+SELECT * FROM revision_car_items_limits WHERE id_car = :id_car;
+
+-- GET REVISION LIMITS ITEMS FOR A CAR
+-- :name get-all-revision-limits :? :0
+-- :doc Retrieve all revision limits items for a specific car from the revision_car_items_limits table
+SELECT * FROM revision_car_items_limits;

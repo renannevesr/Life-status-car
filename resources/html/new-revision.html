@@ -5,6 +5,17 @@
 <h2>Ano: {{car.year}}</h2>
 <h2>Última revisão: {{car.last-revision.last_revision_date}}</h2>
 <h2>Última quilometragem: {{car.last-revision.km}} km</h2>
+
+<br> <br> {{items}}
+<br> <br>
+<div>
+    {% for item in items %}
+    <h2>Item: {{item.item}}</h2>
+    <h2>KM limite: {{item.limit_km}}</h2>
+    <h2>Tempo limite: {{item.limit_date_months}}</h2>
+    {% endfor %}
+</div>
+
 <form method="POST" action="/add-revision">
     {% csrf-field %}
     <label for="last-revision-date">Data da última revisão:</label>

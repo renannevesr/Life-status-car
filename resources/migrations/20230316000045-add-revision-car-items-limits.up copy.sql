@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS revision_car_items_limits CASCADE;

@@ -29,7 +29,7 @@ SELECT * FROM cars
 WHERE id = :id;
 
 -- INSERT A NEW REVISION
--- :name insert-revision! :! :n
+-- :name create-revision :! :n
 -- :doc Insert a new revision into the revisions table
 INSERT INTO revisions (id_car, last_revision_date, created_at, km)
 VALUES (:id_car, :last_revision_date, :created_at, :km);

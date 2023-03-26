@@ -13,10 +13,18 @@
      (db/create-car params)
      (response/found "/"))
 
-; (defn create-revision [request]
-;   (def params (:params request)) 
-;     ;  (db/create-revision params)
-;   )
+(defn create-revision [request]
+  (let [params (assoc (:params request) :created_at "2022-03-01")
+        car-id (:id_car params)]
+    (db/create-revision params)
+    (response/found (str "/revisao/" car-id "#success"))))
+
+(defn create-revision [request]
+  (let [params (assoc (:params request) :created_at (-> (java.time.LocalDate/now)
+                                                       (.format (java.time.format.DateTimeFormatter/ofPattern "yyyy-MM-dd")))) 
+        car-id (:id_car params)]
+    (db/create-revision params)
+    (response/found (str "/revisao/" car-id "#success"))))
 
 (defn home-page [request]
   (let [cars (db/get-all-cars)]
@@ -42,6 +50,6 @@
    ["/criar" {:get create-car-page}]
    ["/revisao/:id" {:get new-revision-page}]
    ["/add-car" {:post create-car}] 
-  ;  ["/add-revision" {:post create-revision}]
+   ["/add-revision" {:post create-revision}]
    ])
 

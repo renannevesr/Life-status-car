@@ -4,8 +4,9 @@
 <h2>Marca: {{car.brand}}</h2>
 <h2>Ano: {{car.year}}</h2>
 <form method="POST" action="/add-revision">
+    {% csrf-field %}
     <label for="last-revision-date">Data da última revisão:</label>
-    <input type="datetime-local" id="last-revision-date" name="last_revision_date" required><br>
+    <input type="date" id="last-revision-date" name="last_revision_date" required><br>
 
     <label for="km">Quilometragem:</label>
     <input type="number" id="km" name="km" required><br>

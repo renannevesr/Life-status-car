@@ -41,6 +41,11 @@
     (def car (first (filter #(= (:id %) id) cars)))
     (layout/render request "new-revision.html" {:car car}))
 
+(defn delete-car [{{id :id} :params}]
+  (db/delete-car id)
+  {:status 204
+   :body ""})
+
 (defn home-routes []
   [ ""
   {:middleware [middleware/wrap-csrf
@@ -51,5 +56,6 @@
    ["/revisao/:id" {:get new-revision-page}]
    ["/add-car" {:post create-car}] 
    ["/add-revision" {:post create-revision}]
+   ["/delete-car/:id" {:delete delete-car}]
    ])
 

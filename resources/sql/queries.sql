@@ -12,7 +12,7 @@ SET model = :model, year = :year, brand = :brand
 WHERE id = :id;
 
 -- DELETE A CAR
--- :name delete-car! :! :n
+-- :name delete-car :! :n
 -- :doc Delete an existing car record from the cars table
 DELETE FROM cars
 WHERE id = :id;

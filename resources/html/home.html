@@ -1,4 +1,6 @@
 {% extends "base.html" %} {% block content %}
+<script src="/js/car.js"></script>
+
 <div class="content">
   <h1>Lista de carros:</h1>
 
@@ -21,7 +23,9 @@
         <td>
           <button>Detalhes</button>
           <button class="editar">Editar</button>
-          <button class="excluir">Excluir</button>
+          <button onclick="deleteCar({{ car.id }})" class="excluir">
+            Excluir
+          </button>
         </td>
       </tr>
       {% endfor %}

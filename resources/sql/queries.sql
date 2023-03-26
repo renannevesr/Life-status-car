@@ -51,4 +51,6 @@ WHERE id = :id;
 -- :name get-revisions-for-car :? :1
 -- :doc Retrieve all revisions for a specific car from the revisions table
 SELECT * FROM revisions
-WHERE id_car = :id_car;
+WHERE id_car = :id_car
+ORDER BY last_revision_date DESC
+LIMIT 1;

@@ -3,6 +3,8 @@
 <h2>Modelo: {{car.model}}</h2>
 <h2>Marca: {{car.brand}}</h2>
 <h2>Ano: {{car.year}}</h2>
+<h2>Última revisão: {{car.last-revision.last_revision_date}}</h2>
+<h2>Última quilometragem: {{car.last-revision.km}} km</h2>
 <form method="POST" action="/add-revision">
     {% csrf-field %}
     <label for="last-revision-date">Data da última revisão:</label>

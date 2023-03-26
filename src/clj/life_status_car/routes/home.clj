@@ -13,12 +13,6 @@
      (db/create-car params)
      (response/found "/"))
 
-; (defn create-revision [request]
-;   (let [params (assoc (:params request) :created_at "2022-03-01")
-;         car-id (:id_car params)]
-;     (db/create-revision params)
-;     (response/found (str "/revisao/" car-id "#success"))))
-
 (defn create-revision [request]
   (let [params (assoc (:params request) :created_at (-> (java.time.LocalDate/now)
                                                        (.format (java.time.format.DateTimeFormatter/ofPattern "yyyy-MM-dd")))) 
@@ -34,13 +28,14 @@
   (layout/render request "create.html"))
 
 (defn new-revision-page [request]
-  (def id (-> request
-                  (get-in [:path-params :id])
-                  (Integer/parseInt)))
-  (def cars (db/get-all-cars))
-    (def car (first (filter #(= (:id %) id) cars)))
-    (layout/render request "new-revision.html" {:car car}))
-
+  (let [id (-> request
+               (get-in [:path-params :id])
+               (Integer/parseInt))
+        car (db/get-car-by-id {:id id})
+        revisions (db/get-revisions-for-car {:id_car id})]
+        (println revisions)
+    (layout/render request "new-revision.html"
+                   {:car (assoc car :last-revision revisions)})))
 
 (defn edit-car [request]
   (def id (-> request
@@ -50,14 +45,12 @@
     (layout/render request "update.html" {:car car}))
 
 (defn delete-car [request]
-(def id (-> request
-                  (get-in [:path-params :id])
-                  (Integer/parseInt)))
-  (db/delete-car {:id id})
-  {:status 204
-   :body ""})
-
-
+  (def id (-> request
+                    (get-in [:path-params :id])
+                    (Integer/parseInt)))
+    (db/delete-car {:id id})
+    {:status 204
+    :body ""})
 
 (defn update-car [request]
   (let [id (-> request

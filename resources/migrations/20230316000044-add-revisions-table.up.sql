@@ -5,5 +5,5 @@ CREATE TABLE revisions (
   created_at DATE NOT NULL,
   km INT NOT NULL,
   PRIMARY KEY (ID),
-  FOREIGN KEY (id_car) REFERENCES cars (id)
+  FOREIGN KEY (id_car) REFERENCES cars (id) ON DELETE CASCADE
 );

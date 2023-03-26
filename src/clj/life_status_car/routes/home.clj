@@ -41,8 +41,11 @@
     (def car (first (filter #(= (:id %) id) cars)))
     (layout/render request "new-revision.html" {:car car}))
 
-(defn delete-car [{{id :id} :params}]
-  (db/delete-car id)
+(defn delete-car [request]
+(def id (-> request
+                  (get-in [:path-params :id])
+                  (Integer/parseInt)))
+  (db/delete-car {:id id})
   {:status 204
    :body ""})
 

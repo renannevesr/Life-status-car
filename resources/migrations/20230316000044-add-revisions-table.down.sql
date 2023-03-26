@@ -1,1 +1,1 @@
-DROP TABLE IF EXISTS revisions;
+DROP TABLE IF EXISTS revisions CASCADE;

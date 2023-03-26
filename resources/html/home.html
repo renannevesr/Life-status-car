@@ -2,28 +2,27 @@
 <script src="/js/car.js"></script>
 
 <div class="content">
-  <h1>Lista de carros:</h1>
+    <h1>Lista de carros:</h1>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Modelo do carro</th>
-        <th>Ano do carro</th>
-        <th>Marca do carro</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
+    <table>
+        <thead>
+            <tr>
+                <th>Modelo do carro</th>
+                <th>Ano do carro</th>
+                <th>Marca do carro</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
 
-    <tbody>
-      {% for car in cars %}
-      <tr>
-        <td>{{ car.model }}</td>
-        <td>{{ car.year }}</td>
-        <td>{{ car.brand }}</td>
-        <td>
-          <a href="/revisao/{{ car.id }}"><button>Detalhes</button></a>
-          <a href="/editar/{{ car.id }}"
-            ><button class="editar">Editar</button></a
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ car.model }}</td>
+                <td>{{ car.year }}</td>
+                <td>{{ car.brand }}</td>
+                <td>
+                    <a href="/revisao/{{ car.id }}"><button>Detalhes</button></a>
+                    <a href="/editar/{{ car.id }}"><button class="editar">Editar</button></a
           >
           <button onclick="deleteCar({{ car.id }})" class="excluir">
             Excluir
@@ -33,5 +32,6 @@
       {% endfor %}
     </tbody>
   </table>
+    <a href="/criar">Novo carro</a>
 </div>
 {% endblock %}

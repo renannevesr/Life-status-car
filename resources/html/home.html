@@ -1,4 +1,6 @@
 {% extends "base.html" %} {% block content %}
+<script src="/js/car.js"></script>
+
 <div class="content">
     <h1>Lista de carros:</h1>
     <ul>
@@ -6,6 +8,7 @@
         <li>
             {{ car }}
             <a href="/revisao/{{ car.id }}">Nova revisão</a>
+            <button onclick="deleteCar({{ car.id }})">Excluir</button>
         </li>
         {% endfor %}
     </ul>

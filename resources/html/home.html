@@ -21,8 +21,10 @@
         <td>{{ car.year }}</td>
         <td>{{ car.brand }}</td>
         <td>
-          <button>Detalhes</button>
-          <button class="editar">Editar</button>
+          <a href="/revisao/{{ car.id }}"><button>Detalhes</button></a>
+          <a href="/editar/{{ car.id }}"
+            ><button class="editar">Editar</button></a
+          >
           <button onclick="deleteCar({{ car.id }})" class="excluir">
             Excluir
           </button>

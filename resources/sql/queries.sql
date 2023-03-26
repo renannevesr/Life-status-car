@@ -5,7 +5,7 @@ INSERT INTO cars (model, year, brand)
 VALUES (:model, :year, :brand);
 
 -- UPDATE A CAR
--- :name update-car! :! :n
+-- :name update-car :! :n
 -- :doc Update an existing car record in the cars table
 UPDATE cars
 SET model = :model, year = :year, brand = :brand

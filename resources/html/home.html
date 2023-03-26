@@ -1,13 +1,31 @@
 {% extends "base.html" %} {% block content %}
 <div class="content">
-    <h1>Lista de carros:</h1>
-    <ul>
-        {% for car in cars %}
-        <li>
-            {{ car }}
-            <a href="/revisao/{{ car.id }}">Nova revisão</a>
-        </li>
-        {% endfor %}
-    </ul>
+  <h1>Lista de carros:</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Modelo do carro</th>
+        <th>Ano do carro</th>
+        <th>Marca do carro</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for car in cars %}
+      <tr>
+        <td>{{ car.model }}</td>
+        <td>{{ car.year }}</td>
+        <td>{{ car.brand }}</td>
+        <td>
+          <button>Detalhes</button>
+          <button class="editar">Editar</button>
+          <button class="excluir">Excluir</button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}

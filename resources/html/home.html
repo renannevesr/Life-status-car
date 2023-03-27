@@ -30,6 +30,7 @@
         <td>{{ car.model }}</td>
         <td>{{ car.year }}</td>
         <td>{{ car.brand }}</td>
+        
         <td  style="display: flex; align-items: center;justify-content: center; width: 100%;">
           <link
             rel="stylesheet"
@@ -55,6 +56,6 @@
       {% endfor %}
     </tbody>
   </table>
-  <a href="/criar"><button>Novo carro</button></a>
+  <a href="/criar"><button style="background-color: transparent"><i class="fas fa-plus" style="color: #555; padding: 10px 15px"></i></button></a>
 </div>
 {% endblock %}

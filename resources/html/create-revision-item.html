@@ -1,0 +1,26 @@
+{% extends "base.html" %} {% block content %}
+<div class="content">
+  <h1>Adicionar item de revisão:</h1>
+  <form method="post" action="/add-revision-item">
+    {% csrf-field %}
+
+    <input type="hidden" name="id_car" value="1" />
+
+    <label for="item">Item:</label>
+    <input type="text" name="item" id="item" required /><br /><br />
+
+    <label for="limit_km">Limite de quilometragem:</label>
+    <input type="number" name="limit_km" id="limit_km" required /><br /><br />
+
+    <label for="limit_date_months">Limite de meses:</label>
+    <input
+      type="number"
+      name="limit_date_months"
+      id="limit_date_months"
+      required
+    /><br /><br />
+    <button class="excluir">Parar nesta adição</button>
+    <button type="submit">Continuar adicionando</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Welcome to life-status-car</title>
 
     <!-- styles -->
-    {% style "/assets/bulma/css/bulma.min.css" %}
-    {% style "/assets/material-icons/css/material-icons.min.css" %}
-
-    {% style "/css/screen.css" %}
-    {% style "/css/home.css" %}
+    {% style "/assets/bulma/css/bulma.min.css" %} 
+    {% style "/assets/material-icons/css/material-icons.min.css" %} 
+    {% style "/css/screen.css" %} 
+    {% style "/css/home.css" %} 
+    {% style "/css/new-revision.css" %}
   </head>
   <body>
-      <!-- navbar -->
-      <nav class="navbar is-info">
-          <div class="container">
+    <!-- navbar -->
+    <nav class="navbar is-info">
+          <div class="container" style="background-color:  #555">
               <div class="navbar-brand">
                   <a class="navbar-item" href="/" style="font-weight:bold;">life-status-car</a>
                   <span class="navbar-burger burger" data-target="nav-menu">
@@ -33,27 +33,22 @@
           </div>
       </nav>
 
-      <section class="section">
-          <div class="container">
-              {% block content %}
-              {% endblock %}
-          </div>
-      </section>
+    <section class="section">
+      <div class="container">{% block content %} {% endblock %}</div>
+    </section>
 
     <!-- scripts -->
     <script type="text/javascript">
-      (function() {
-        var burger = document.querySelector('.burger');
-        var nav = document.querySelector('#'+burger.dataset.target);
-        burger.addEventListener('click', function(){
-          burger.classList.toggle('is-active');
-          nav.classList.toggle('is-active');
+      (function () {
+        var burger = document.querySelector(".burger");
+        var nav = document.querySelector("#" + burger.dataset.target);
+        burger.addEventListener("click", function () {
+          burger.classList.toggle("is-active");
+          nav.classList.toggle("is-active");
         });
       })();
     </script>
 
-    
-    {% block page-scripts %}
-    {% endblock %}
+    {% block page-scripts %} {% endblock %}
   </body>
 </html>

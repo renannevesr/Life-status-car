@@ -11,7 +11,20 @@
 (defn create-car [request] 
   (def params (:params request)) 
      (db/create-car params)
-     (response/found "/"))
+     (response/found "/item"))
+
+     (defn create-car-page [request]
+  (layout/render request "create.html"))
+
+
+(defn create-item [request]
+  (let [params (:params request)]
+    (db/create-revision-item params)
+    (response/found (str "/"))))
+
+     
+(defn create-item-page [request]
+  (layout/render request "create-revision-item.html"))
 
 (defn create-revision [request]
   (let [params (assoc (:params request) :created_at (-> (java.time.LocalDate/now)
@@ -25,8 +38,7 @@
     (println (type cars))
     (layout/render request "home.html" {:cars cars})))
 
-(defn create-car-page [request]
-  (layout/render request "create.html"))
+
 
 (defn new-revision-page [request]
   (let [id (-> request
@@ -92,5 +104,7 @@
    ["/delete-car/:id" {:delete delete-car}]
    ["/editar/:id" {:get edit-car}]
    ["/edit-car/:id" {:post update-car}]
+   ["/item" {:get create-item-page}]
+   ["/add-revision-item" {:post create-item}] 
    ])
 

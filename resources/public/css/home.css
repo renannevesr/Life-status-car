@@ -30,7 +30,7 @@ tr:nth-child(odd) {
 
 /* Estilo para os botões de ação */
 button {
-  background-color: #4caf50; /* Verde */
+  background-color: greenyellow; /* Verde */
   border: none;
   color: white;
   padding: 8px 16px;
@@ -45,15 +45,20 @@ button {
 
 /* Estilo para o botão de detalhes */
 button.detalhes {
-  background-color: #008cba; /* Azul */
+  background-color: #008cba !important; /* Azul */
 }
 
 /* Estilo para o botão de edição */
 button.editar {
-  background-color: #fdd835; /* Amarelo */
+  background-color: seagreen !important; /* Amarelo */
 }
 
 /* Estilo para o botão de exclusão */
 button.excluir {
-  background-color: #f44336; /* Vermelho */
+  background-color: skyblue !important; /* Vermelho */
+}
+
+.jack img {
+  width: 200px;
+  height: 200px;
 }

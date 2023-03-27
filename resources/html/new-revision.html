@@ -1,31 +1,85 @@
 {% extends "base.html" %} {% block content %}
-<h1>Detalhes do carro</h1>
-<h2>Modelo: {{car.model}}</h2>
-<h2>Marca: {{car.brand}}</h2>
-<h2>Ano: {{car.year}}</h2>
-<h2>Última revisão: {{car.last-revision.last_revision_date}}</h2>
-<h2>Última quilometragem: {{car.last-revision.km}} km</h2>
+<div class="revision-container">
+  <h1 class="revision__title">Detalhes do carro</h1>
+  <div class="resion__information">
+    <span class="bold">
+      Modelo:
+      <span class="ligthin"> {{car.model}} </span>
+    </span>
+    <span class="bold">
+      Marca:
+      <span class="ligthin"> {{car.brand}} </span>
+    </span>
+    <span class="bold">
+      Ano:
+      <span class="ligthin"> {{car.year}} </span>
+    </span>
+    <span class="bold">
+      Última revisão:
+      <span class="ligthin"> {{car.last-revision.last_revision_date}}</span>
+    </span>
+    <span class="bold">
+      Última quilometragem:
+      <span class="ligthin"> {{car.last-revision.km}} km</span>
+    </span>
+  </div>
 
-<br> <br> {{items}}
-<br> <br>
-<div>
+  <br />
+  <br />
+  {{items}} <br />
+  <br />
+
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Tempo limite</th>
+        <th>Km limite</th>
+        <!-- <th>Tempo restante</th> -->
+        <th>Proxima troca em</th>
+        <!-- <th>Situação</th> -->
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td><span>{{item.item}}</span></td>
+        <td><span>{{item.limit_date_months}}</span></td>
+        <td><span>{{item.limit_km}}</span></td>
+        <!-- <td><span>{{item.}}</span></td> -->
+        <td><span>{{item.limit_km + car.last-revision.km}}</span></td>
+        <!-- <td><span>verde</span></td> -->
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <br />
+  <div>
     {% for item in items %}
     <h2>Item: {{item.item}}</h2>
     <h2>KM limite: {{item.limit_km}}</h2>
     <h2>Tempo limite: {{item.limit_date_months}}</h2>
     {% endfor %}
-</div>
+  </div>
 
-<form method="POST" action="/add-revision">
+  <form method="POST" action="/add-revision">
     {% csrf-field %}
     <label for="last-revision-date">Data da última revisão:</label>
-    <input type="date" id="last-revision-date" name="last_revision_date" required><br>
+    <input
+      type="date"
+      id="last-revision-date"
+      name="last_revision_date"
+      required
+    /><br />
 
     <label for="km">Quilometragem:</label>
-    <input type="number" id="km" name="km" required><br>
+    <input type="number" id="km" name="km" required /><br />
 
-    <input type="hidden" id="id-car" name="id_car" value="{{ car.id }}">
+    <input type="hidden" id="id-car" name="id_car" value="{{ car.id }}" />
 
     <button type="submit">Inserir revisão</button>
-</form>
+  </form>
+</div>
 {% endblock %}

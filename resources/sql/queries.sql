@@ -4,6 +4,12 @@
 INSERT INTO cars (model, year, brand)
 VALUES (:model, :year, :brand);
 
+-- INSERT A NEW ITEM
+-- :name create-revision-item :! :n
+-- :doc Insert a new item into the cars table
+INSERT INTO revision_car_items_limits (id_car, item, limit_km, limit_date_months)
+VALUES (:id_car, :item, :limit_km, :limit_date_months);
+
 -- UPDATE A CAR
 -- :name update-car :! :n
 -- :doc Update an existing car record in the cars table

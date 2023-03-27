@@ -2,36 +2,59 @@
 <script src="/js/car.js"></script>
 
 <div class="content">
-    <h1>Lista de carros:</h1>
+  <div class="jack">
+    <img
+      fit="contain"
+      src="img/picofme.png"
+      alt="Descrição da imagem"
+      width="150px"
+    />
+  </div>
+  <h1>Lista de carros:</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Modelo do carro</th>
-                <th>Ano do carro</th>
-                <th>Marca do carro</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
+  <table>
+    <thead>
+      <tr>
+        <th>Modelo do carro</th>
+        <th>Ano do carro</th>
+        <th>Marca do carro</th>
+        <th><div style="display: flex; align-items: center;justify-content: center; width: 100%;">
+          <span style="text-align: center">Ações</span></th>
+        </div>
+      </tr>
+    </thead>
 
-        <tbody>
-            {% for car in cars %}
-            <tr>
-                <td>{{ car.model }}</td>
-                <td>{{ car.year }}</td>
-                <td>{{ car.brand }}</td>
-                <td>
-                    <a href="/revisao/{{ car.id }}"><button>Detalhes</button></a>
-                    <a href="/editar/{{ car.id }}"><button class="editar">Editar</button></a
+    <tbody>
+      {% for car in cars %}
+      <tr>
+        <td>{{ car.model }}</td>
+        <td>{{ car.year }}</td>
+        <td>{{ car.brand }}</td>
+        <td  style="display: flex; align-items: center;justify-content: center; width: 100%;">
+          <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          />
+          <a href="/revisao/{{ car.id }}">
+            <i class="fas fa-eye" style="color: #555; padding: 10px 15px"></i>
+          </a>
+          <a href="/editar/{{ car.id }}">
+            <i
+              class="fas fa-pencil-alt"
+              style="color: #555; padding: 10px 15px"
+            ></i>
+          </a>
+          <button
+            onclick="deleteCar({{ car.id }})"
+            style="background-color: transparent"
           >
-          <button onclick="deleteCar({{ car.id }})" class="excluir">
-            Excluir
+            <i class="fas fa-trash" style="color: #555"></i>
           </button>
         </td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
-    <a href="/criar">Novo carro</a>
+  <a href="/criar"><button>Novo carro</button></a>
 </div>
 {% endblock %}

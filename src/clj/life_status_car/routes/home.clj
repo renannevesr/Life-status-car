@@ -35,10 +35,10 @@
 
 (defn home-page [request]
   (let [cars (db/get-all-cars)]
-    (println (type cars))
     (layout/render request "home.html" {:cars cars})))
 
-
+(defn add-km-exchange [revisions items]
+  (map #(assoc % :km_exchange (+ (:km revisions) (:limit_km %))) items))
 
 (defn new-revision-page [request]
   (let [id (-> request
@@ -47,11 +47,11 @@
         car (db/get-car-by-id {:id id})
         revisions (db/get-revisions-for-car {:id_car id})
         items (db/get-revision-limits-items-for-car {:id_car id})
-        ]
+        updated-items (add-km-exchange revisions items)]
     (layout/render request "new-revision.html"
                    {:car (assoc car :last-revision revisions)
-                    :items items
-                   })))
+                    :items updated-items})))
+
 
 (defn edit-car [request]
   (def id (-> request

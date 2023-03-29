@@ -13,3 +13,7 @@ function deleteCar(carId) {
             console.error("Erro ao excluir o carro:", error);
         });
 }
+
+function enableFormRevision() {
+    document.getElementById("form-add-new-revision").style.display = "block";
+}

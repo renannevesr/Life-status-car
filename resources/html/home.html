@@ -2,60 +2,49 @@
 <script src="/js/car.js"></script>
 
 <div class="content">
-  <!-- <div class="jack">
-    <img
-      fit="contain"
-      src="img/picofme.png"
-      alt="Descrição da imagem"
-      width="150px"
-    />
-  </div> -->
-  <h1>Lista de carros:</h1>
+    <div style="display: flex; justify-content: space-between">
+        <h1>Lista de carros:</h1>
+        <a href="/criar"><button style="background-color: transparent"><i class="fas fa-plus" style="color: #555; padding: 10px 15px"></i></button></a>
+    </div>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Modelo do carro</th>
-        <th>Ano do carro</th>
-        <th>Marca do carro</th>
-        <th><div style="display: flex; align-items: center;justify-content: center; width: 100%;">
-          <span style="text-align: center">Ações</span></th>
-        </div>
-      </tr>
-    </thead>
+    <table>
+        <thead>
+            <tr>
+                <th>Modelo do carro</th>
+                <th>Ano do carro</th>
+                <th>Marca do carro</th>
+                <th>
+                    <div style="display: flex; align-items: center;justify-content: center; width: 100%;">
+                        <span style="text-align: center">Ações</span></th>
+                </div>
+            </tr>
+        </thead>
 
-    <tbody>
-      {% for car in cars %}
-      <tr>
-        <td>{{ car.model }}</td>
-        <td>{{ car.year }}</td>
-        <td>{{ car.brand }}</td>
-        
-        <td  style="display: flex; align-items: center;justify-content: center; width: 100%;">
-          <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-          />
-          <a href="/revisao/{{ car.id }}">
-            <i class="fas fa-eye" style="color: #555; padding: 10px 15px"></i>
-          </a>
-          <a href="/editar/{{ car.id }}">
-            <i
-              class="fas fa-pencil-alt"
-              style="color: #555; padding: 10px 15px"
-            ></i>
-          </a>
-          <button
-            onclick="deleteCar({{ car.id }})"
-            style="background-color: transparent"
-          >
-            <i class="fas fa-trash" style="color: #555"></i>
-          </button>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  <a href="/criar"><button style="background-color: transparent"><i class="fas fa-plus" style="color: #555; padding: 10px 15px"></i></button></a>
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ car.model }}</td>
+                <td>{{ car.year }}</td>
+                <td>{{ car.brand }}</td>
+
+                <td style="display: flex; align-items: center;justify-content: center; width: 100%;">
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+                    <a href="/revisao/{{ car.id }}">
+                        <i class="fas fa-eye" style="color: #555; padding: 10px 15px"></i>
+                    </a>
+                    <a href="/item/{{ car.id }}">
+                        <i class="fas fa-cog" style="color: #555; padding: 10px 15px"></i>
+                    </a>
+                    <a href="/editar/{{ car.id }}">
+                        <i class="fas fa-pencil-alt" style="color: #555; padding: 10px 15px"></i>
+                    </a>
+                    <button onclick="deleteCar({{ car.id }})" style="background-color: transparent">
+                      <i class="fas fa-trash" style="color: #555"></i>
+                    </button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 {% endblock %}

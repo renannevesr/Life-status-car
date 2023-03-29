@@ -24,7 +24,11 @@
 
      
 (defn create-item-page [request]
-  (layout/render request "create-revision-item.html"))
+(def id (-> request
+                  (get-in [:path-params :id])
+                  (Integer/parseInt)))
+  (layout/render request "create-revision-item.html" {:id id}))
+
 
 (defn create-revision [request]
   (let [params (assoc (:params request) :created_at (-> (java.time.LocalDate/now)
@@ -109,7 +113,7 @@
    ["/delete-car/:id" {:delete delete-car}]
    ["/editar/:id" {:get edit-car}]
    ["/edit-car/:id" {:post update-car}]
-   ["/item" {:get create-item-page}]
+   ["/item/:id" {:get create-item-page}]
    ["/add-revision-item" {:post create-item}] 
    ])
 

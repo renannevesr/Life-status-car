@@ -25,14 +25,11 @@
     </div>
 
     <br />
-    <br /> {{car}} <br />
-    <br />
-
     <table>
         <thead>
             <tr>
                 <th>Item</th>
-                <th>Tempo limite</th>
+                <th>Tempo para troca</th>
                 <th>Km limite</th>
                 <th>Tempo restante</th>
                 <th>Trocar em (km)</th>
@@ -46,22 +43,13 @@
                 <td><span>{{item.item}}</span></td>
                 <td><span>{{item.limit_date_months}} meses</span></td>
                 <td><span>{{item.limit_km}} km</span></td>
-                <td><span>tempo restante teste</span></td>
+                <td><span>{{item.remaining_months}} meses</span></td>
                 <td><span>{{item.km_exchange}} km</span></td>
                 <td><span>verde</span></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-
-    <br />
-    <div>
-        {% for item in items %}
-        <h2>Item: {{item.item}}</h2>
-        <h2>KM limite: {{item.limit_km}}</h2>
-        <h2>Tempo limite: {{item.limit_date_months}}</h2>
-        {% endfor %}
-    </div>
 
     <form method="POST" action="/add-revision">
         {% csrf-field %}

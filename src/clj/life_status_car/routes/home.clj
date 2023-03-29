@@ -40,6 +40,24 @@
 (defn add-km-exchange [revisions items]
   (map #(assoc % :km_exchange (+ (:km revisions) (:limit_km %))) items))
 
+(defn add-remaining-months [items diferenca]
+  (map #(assoc % :remaining_months (- (:limit_date_months %) diferenca)) items))
+
+(defn months-between [date1 date2]
+  (let [months1 (-> date1
+                    (.getYear)
+                    (* 12))
+        months2 (-> date2
+                    (.getYear)
+                    (* 12))
+        months (-> date1
+                   (.getMonthValue)
+                   (- months1))
+        months2 (-> date2
+                    (.getMonthValue)
+                    (- months2))]
+    (- months months2)))
+
 (defn new-revision-page [request]
   (let [id (-> request
                (get-in [:path-params :id])
@@ -47,10 +65,12 @@
         car (db/get-car-by-id {:id id})
         revisions (db/get-revisions-for-car {:id_car id})
         items (db/get-revision-limits-items-for-car {:id_car id})
-        updated-items (add-km-exchange revisions items)]
+        updated-items (if (seq revisions) (add-km-exchange revisions items) items)
+        monthsDif (if (seq revisions) (months-between (java.time.LocalDate/now) (:last_revision_date revisions)) 0)
+        new-items (if (seq revisions) (add-remaining-months updated-items monthsDif) items)]
     (layout/render request "new-revision.html"
                    {:car (assoc car :last-revision revisions)
-                    :items updated-items})))
+                    :items new-items})))
 
 
 (defn edit-car [request]
@@ -78,21 +98,6 @@
     (db/update-car (assoc params :id id)) 
     
     (response/found "/")))
-
-
-(defn diff-in-months [date1 months]
-  (let [days-in-month (fn [date]
-                        (-> date
-                            (.withDayOfMonth 1)
-                            (.plusMonths 1)
-                            (.minusDays 1)
-                            (.getDayOfMonth)))
-        now (java.time.LocalDate/now)
-        months1 (* (- (.getYear date1) 1900) 12 (+ (.getMonth date1) 1))
-        months2 (* (- (.getYear now) 1900) 12 (+ (.getMonth now) 1))
-        days1 (days-in-month date1)
-        days2 (days-in-month now)]
-    (>= (- (+ months1 days1) (+ months2 days2)) months)))
 
 (defn home-routes []
   [ ""

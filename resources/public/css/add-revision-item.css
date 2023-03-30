@@ -1,0 +1,31 @@
+.add-revision-form {
+  /* background-color: red; */
+  width: 20%;
+  padding: 1rem;
+  margin-top: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  border: 1px solid rgb(64, 64, 64);
+  border-radius: 5px;
+  box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.revision-input-label {
+  font-weight: bold;
+}
+
+.revision-input {
+  padding: 0.5rem 0.25rem;
+}
+
+#sign-up-revision {
+  background-color: rgb(83, 216, 234);
+}

@@ -1,98 +1,128 @@
 {% extends "base.html" %} {% block content %}
 <script src="/js/car.js"></script>
 <div class="revision-container">
-    <h1 class="revision__title">Detalhes do carro</h1>
-    <div class="resion__information">
-        <span class="bold">
+  <h1 class="revision__title">Detalhes do carro</h1>
+  <div class="resion__information">
+    <span class="bold">
       Modelo:
       <span class="ligthin"> {{car.model}} </span>
-        </span>
-        <span class="bold">
+    </span>
+    <span class="bold">
       Marca:
       <span class="ligthin"> {{car.brand}} </span>
-        </span>
-        <span class="bold">
+    </span>
+    <span class="bold">
       Ano:
       <span class="ligthin"> {{car.year}} </span>
-        </span>
-        <span class="bold">
+    </span>
+    <span class="bold">
       Última revisão:
-      <span class="ligthin"> {{car.last-revision.last_revision_date}}</span>
-        </span>
-        <span class="bold">
+      <span class="ligthin">
+        {{car.last-revision.last_revision_date}}</span
+      >
+    </span>
+    <span class="bold">
       Última quilometragem:
       <span class="ligthin"> {{car.last-revision.km}} km</span>
-        </span>
-    </div>
+    </span>
+  </div>
 
-    <br />
-    <table>
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Tempo para troca</th>
-                <th>Km limite</th>
-                <th>Tempo restante</th>
-                <th>Trocar em (km)</th>
-                <th>Situação</th>
-            </tr>
-        </thead>
-        <div class="situation-yellow"></div>
-        <tbody>
-            {% for item in items %}
-            <tr>
-                <td><span>{{item.item}}</span></td>
-                <td><span>{{item.limit_date_months}} meses</span></td>
-                <td><span>{{item.limit_km}} km</span></td>
-                <td><span>{{item.remaining_months}} meses</span></td>
-                <td><span>{{item.km_exchange}} km</span></td>
-                <td style="display: flex; justify-content:center">
-                    {% if item.remaining_months >= 1 %}
-                    <div id="situation-yellow" style="background-color: yellow;
-                    width: 20px;
-                    height: 20px;
-                    border-radius: 50%;">
-                    </div>
-                    {%endif %}
-                    <!------------------------------------------->
-                    {% if item.remaining_months
-                    < 1 %} <div id="situation-red" style="background-color: red;
-                    width: 20px;
-                    height: 20px;
-                    border-radius: 50%;">
-</div>
-{%endif %}
-<!------------------------------------------->
-{% if item.remaining_months >= 3 %}
-<div id="situation-green" style="background-color: green;
-                    width: 20px;
-                    height: 20px;
-                    border-radius: 50%;">
-</div>
-{%endif %}
-</td>
-</tr>
-{% endfor %}
-</tbody>
-</table>
-<br>
+  <br />
+  <table>
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Tempo para troca</th>
+        <th>Km limite</th>
+        <th>Tempo restante</th>
+        <th>Trocar em (km)</th>
+        <th>Situação</th>
+      </tr>
+    </thead>
+    <div class="situation-yellow"></div>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td><span>{{item.item}}</span></td>
+        <td><span>{{item.limit_date_months}} meses</span></td>
+        <td><span>{{item.limit_km}} km</span></td>
+        <td><span>{{item.remaining_months}} meses</span></td>
+        <td><span>{{item.km_exchange}} km</span></td>
+        <td style="display: flex; justify-content: center">
+          {% if item.remaining_months >= 1 %}
+          <div
+            id="situation-yellow"
+            style="
+              background-color: yellow;
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+            "
+          ></div>
+          {%endif %}
+          <!------------------------------------------->
+          {% if item.remaining_months < 1 %}
+          <div
+            id="situation-red"
+            style="
+              background-color: red;
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+            "
+          ></div>
+          {%endif %}
+          <!------------------------------------------->
+          {% if item.remaining_months >= 3 %}
+          <div
+            id="situation-green"
+            style="
+              background-color: green;
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+            "
+          ></div>
+          {%endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <br />
 
-<button onclick="enableFormRevision()">Nova revisão</button>
+  <button onclick="enableFormRevision()">+ Nova revisão</button>
 
-<div id="form-add-new-revision" style="display:none">
-    <form method="POST" action="/add-revision">
-        {% csrf-field %}
-        <br>
-        <label for="last-revision-date">Data da última revisão:</label>
-        <input type="date" id="last-revision-date" name="last_revision_date" required /><br />
+  <div id="form-add-new-revision" style="display: none">
+    <form method="POST" action="/add-revision" class="add-revision-form">
+      {% csrf-field %}
+      <br />
 
-        <label for="km">Quilometragem:</label>
-        <input type="number" id="km" name="km" required /><br />
+      <section class="input-container">
+        <label for="last-revision-date" class="revision-input-label">Data da última revisão:</label>
+        <input
+          type="date"
+          id="last-revision-date"
+          name="last_revision_date"
+          class="revision-input"
+          required
+        />
+      </section>
 
-        <input type="hidden" id="id-car" name="id_car" value="{{ car.id }}" />
-        <br>
-        <button type="submit">Inserir revisão</button>
+      <section class="input-container">
+        <label for="km" class="revision-input-label">Quilometragem:</label>
+        <input type="number" id="km" name="km" class="revision-input" required />
+      </section>
+
+      <input
+        type="hidden"
+        id="id-car"
+        name="id_car"
+        value="{{ car.id }}"
+      />
+      <br />
+      <button type="submit" id="sign-up-revision" onclick="closeFormRevisionModal()">Inserir revisão</button>
     </form>
-</div>
+  </div>
 </div>
 {% endblock %}

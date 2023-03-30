@@ -15,5 +15,9 @@ function deleteCar(carId) {
 }
 
 function enableFormRevision() {
-    document.getElementById("form-add-new-revision").style.display = "block";
+  document.getElementById("form-add-new-revision").style.display = "block";
+}
+
+function closeFormRevisionModal() {
+  document.getElementById("form-add-new-revision").style.display = "none";
 }

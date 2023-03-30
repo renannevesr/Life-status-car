@@ -49,7 +49,10 @@
   (map #(assoc % :km_exchange (+ (:km revisions) (:limit_km %))) items))
 
 (defn add-remaining-months [items diferenca]
-  (map #(assoc % :remaining_months (- (:limit_date_months %) diferenca)) items))
+  (map #(if (= diferenca 0)
+          (assoc % :remaining_months diferenca)
+          (assoc % :remaining_months (- (:limit_date_months %) diferenca)))
+       items))
 
 (defn months-between [date1 date2]
   (let [months1 (-> date1
@@ -63,8 +66,13 @@
                    (- months1))
         months2 (-> date2
                     (.getMonthValue)
-                    (- months2))]
-    (- months months2)))
+                    (- months2))
+        result (- months months2)]
+    (if (neg? result)
+      0
+      result))
+      )
+
 
 (defn new-revision-page [request]
   (let [id (-> request
@@ -74,7 +82,7 @@
         revisions (db/get-revisions-for-car {:id_car id})
         items (db/get-revision-limits-items-for-car {:id_car id})
         updated-items (if (seq revisions) (add-km-exchange revisions items) items)
-        monthsDif (if (seq revisions) (months-between (java.time.LocalDate/now) (:last_revision_date revisions)) 0)
+        monthsDif (if (seq revisions) (months-between (java.time.LocalDate/now) (:last_revision_date revisions)) 0) 
         new-items (if (seq revisions) (add-remaining-months updated-items monthsDif) items)]
     (layout/render request "new-revision.html"
                    {:car (assoc car :last-revision revisions)

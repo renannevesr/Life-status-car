@@ -17,9 +17,7 @@
     </span>
     <span class="bold">
       Última revisão:
-      <span class="ligthin">
-        {{car.last-revision.last_revision_date}}</span
-      >
+      <span class="ligthin"> {{car.last-revision.last_revision_date}}</span>
     </span>
     <span class="bold">
       Última quilometragem:
@@ -35,7 +33,7 @@
         <th>Tempo para troca</th>
         <th>Km limite</th>
         <th>Tempo restante</th>
-        <th>Trocar em (km)</th>
+        <th>Próxima troca no (km)</th>
         <th>Situação</th>
       </tr>
     </thead>
@@ -49,7 +47,19 @@
         <td><span>{{item.remaining_months}} meses</span></td>
         <td><span>{{item.km_exchange}} km</span></td>
         <td style="display: flex; justify-content: center">
-          {% if item.remaining_months >= 1 %}
+          {% if item.remaining_months = 1 %}
+          <div
+            id="situation-yellow"
+            style="
+              background-color: yellow;
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+            "
+          ></div>
+          {%endif %}
+          <!------------------------------------------->
+          {% if item.remaining_months = 2 %}
           <div
             id="situation-yellow"
             style="
@@ -99,7 +109,9 @@
       <br />
 
       <section class="input-container">
-        <label for="last-revision-date" class="revision-input-label">Data da última revisão:</label>
+        <label for="last-revision-date" class="revision-input-label"
+          >Data da última revisão:</label
+        >
         <input
           type="date"
           id="last-revision-date"
@@ -111,17 +123,24 @@
 
       <section class="input-container">
         <label for="km" class="revision-input-label">Quilometragem:</label>
-        <input type="number" id="km" name="km" class="revision-input" required />
+        <input
+          type="number"
+          id="km"
+          name="km"
+          class="revision-input"
+          required
+        />
       </section>
 
-      <input
-        type="hidden"
-        id="id-car"
-        name="id_car"
-        value="{{ car.id }}"
-      />
+      <input type="hidden" id="id-car" name="id_car" value="{{ car.id }}" />
       <br />
-      <button type="submit" id="sign-up-revision" onclick="closeFormRevisionModal()">Inserir revisão</button>
+      <button
+        type="submit"
+        id="sign-up-revision"
+        onclick="closeFormRevisionModal()"
+      >
+        Inserir revisão
+      </button>
     </form>
   </div>
 </div>

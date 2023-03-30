@@ -11,7 +11,7 @@
 (defn create-car [request] 
   (def params (:params request)) 
      (db/create-car params)
-     (response/found "/item"))
+     (response/found "/"))
 
      (defn create-car-page [request]
   (layout/render request "create.html"))

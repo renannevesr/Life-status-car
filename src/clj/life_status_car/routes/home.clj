@@ -18,9 +18,13 @@
 
 
 (defn create-item [request]
-  (let [params (:params request)]
+  (let [params (:params request)
+        id (:id params)
+        action (:action params)] 
     (db/create-revision-item params)
-    (response/found (str "/"))))
+    (condp = action
+      "parar" (response/found (str "/"))
+      "continuar" (response/found (str "/item/" id))))) 
 
      
 (defn create-item-page [request]

@@ -1,29 +1,58 @@
 {% extends "base.html" %} {% block content %}
 <div class="content">
-    <h1>Adicionar item de revisão:</h1>
-    <form method="post" action="/add-revision-item" class="add-revision-item-form">
-        {% csrf-field %}
-        <input type="hidden" name="id_car" value="{{id}}" />
+  <h1>Adicionar item de revisão:</h1>
+  <form
+    method="post"
+    action="/add-revision-item"
+    class="add-revision-item-form"
+  >
+    {% csrf-field %}
+    <input type="hidden" name="id_car" value="{{id}}" />
 
-        <section class="input-container">
-          <label for="item" class="revision-input-label">Item:</label>
-          <input type="text" name="item" id="item" class="revision-input" required /><br /><br />
-        </section>
+    <section class="input-container">
+      <label for="item" class="revision-input-label">Item:</label>
+      <input
+        type="text"
+        name="item"
+        id="item"
+        class="revision-input"
+        required
+      /><br /><br />
+    </section>
 
-        <section class="input-container">
-          <label for="limit_km" class="revision-input-label">Limite de quilometragem:</label>
-          <input type="number" name="limit_km" id="limit_km" class="revision-input" required /><br /><br />
-        </section>
-        
-        <section class="input-container">
-          <label for="limit_date_months" class="revision-input-label">Limite de meses:</label>
-          <input type="number" name="limit_date_months" id="limit_date_months" class="revision-input" required /><br /><br />
-        </section>
+    <section class="input-container">
+      <label for="limit_km" class="revision-input-label"
+        >Limite de quilometragem:</label
+      >
+      <input
+        type="number"
+        name="limit_km"
+        id="limit_km"
+        class="revision-input"
+        required
+      /><br /><br />
+    </section>
 
-        <div class="buttons-container">
-          <button class="excluir">Parar nesta adição</button>
-          <button type="submit">Continuar adicionando</button>
-        </div>
-    </form>
+    <section class="input-container">
+      <label for="limit_date_months" class="revision-input-label"
+        >Limite de meses:</label
+      >
+      <input
+        type="number"
+        name="limit_date_months"
+        id="limit_date_months"
+        class="revision-input"
+        required
+      /><br /><br />
+    </section>
+
+    <div class="buttons-container">
+      <input type="hidden" name="id" value="{{id}}" />
+      <input type="submit" name="action" value="parar" class="excluir" />
+      <input type="submit" name="action" value="continuar" />
+      <!-- <button class="excluir">Parar nesta adição</button>
+          <button type="submit">Continuar adicionando</button> -->
+    </div>
+  </form>
 </div>
 {% endblock %}

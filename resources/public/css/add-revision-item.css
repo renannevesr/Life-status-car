@@ -1,6 +1,5 @@
-.add-revision-form {
-  /* background-color: red; */
-  width: 20%;
+.add-revision-item-form {
+  width: 35%;
   padding: 1rem;
   margin-top: 1rem;
 
@@ -18,14 +17,7 @@
   flex-direction: column;
 }
 
-.revision-input-label {
-  font-weight: bold;
-}
-
-.revision-input {
-  padding: 0.5rem 0.25rem;
-}
-
-#sign-up-revision {
-  background-color: rgb(83, 216, 234);
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
 }
